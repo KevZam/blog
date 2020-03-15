@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import Blog from "./containers/Blog/Blog";
 
-// should start from here
 class App extends Component {
   render() {
     return (
