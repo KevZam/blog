@@ -27,6 +27,7 @@ class FullPost extends Component {
       console.log(response);
     });
   };
+
   render() {
     let post = <p style={{ textAlign: "center" }}>Please select a Post!</p>;
     if (this.props.selectedId) {
