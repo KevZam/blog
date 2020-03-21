@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "../../../axios";
 import Post from "../../../components/Post/Post";
 import "./Posts.css";
+import FullPost from "../FullPost/FullPost";
+import { Route } from "react-router-dom";
 
 class Posts extends Component {
   state = {
@@ -27,9 +29,10 @@ class Posts extends Component {
       });
   }
 
+  // Navigating programatically instead of using the Link Component
   postSelectedHandler = id => {
-    this.props.history.push({ pathname: "/" + id });
-    // or this.props.history.push('/' + id);
+    this.props.history.push({ pathname: "/posts/" + id });
+    // or this.props.history.push('/posts' + id);
   };
 
   render() {
@@ -37,7 +40,7 @@ class Posts extends Component {
     if (!this.state.error) {
       posts = this.state.posts.map(post => {
         return (
-          // <Link to={"/" + post.id} >
+          // <Link to={"/posts/" + post.id} >
           <Post
             key={post.id}
             title={post.title}
@@ -48,7 +51,18 @@ class Posts extends Component {
         );
       });
     }
-    return <section className="Posts">{posts}</section>;
+    return (
+      <div>
+        <section className="Posts">{posts}</section>
+        {/* We use props.match.url to get the current route thus far, this allows us
+        to use dynamic routing and add a new route which has the id after it*/}
+        <Route
+          path={this.props.match.url + "/:id"}
+          exact
+          component={FullPost}
+        ></Route>
+      </div>
+    );
   }
 }
 
