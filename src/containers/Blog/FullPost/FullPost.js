@@ -8,16 +8,19 @@ class FullPost extends Component {
     loadedPost: null
   };
 
-  componentDidUpdate() {
-    if (this.props.selectedId) {
-      if (
-        !this.state.loadedPost ||
-        (this.state.loadedPost &&
-          this.props.selectedId !== this.state.loadedPost.id)
-      ) {
-        axios.get("/posts/" + this.props.selectedId).then(response => {
-          this.setState({ loadedPost: response.data });
-        });
+  componentDidMount() {
+    console.log(this.props);
+    if (this.props.match.params.id) {
+      if (this.props.selectedId) {
+        if (
+          !this.state.loadedPost ||
+          (this.state.loadedPost &&
+            this.props.selectedId !== this.state.loadedPost.id)
+        ) {
+          axios.get("/posts/" + this.props.selectedId).then(response => {
+            this.setState({ loadedPost: response.data });
+          });
+        }
       }
     }
   }
