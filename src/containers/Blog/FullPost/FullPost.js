@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-
 import "./FullPost.css";
 
 class FullPost extends Component {
@@ -30,6 +29,7 @@ class FullPost extends Component {
       }
     }
   }
+
   deletePostHandler = () => {
     axios.delete("/posts/" + this.props.match.params.id).then(response => {
       console.log(response);
@@ -54,7 +54,6 @@ class FullPost extends Component {
         </div>
       );
     }
-
     return post;
   }
 }
